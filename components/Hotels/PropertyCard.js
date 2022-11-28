@@ -95,7 +95,7 @@ export default function PropertyCard({ value }) {
           priority
         />
       </div>
-      <div className="flex flex-col h-[100px] w-full bg-white/50 rounded-bl-[24px] rounded-br-[24px] text-sm text-black overflow-scroll space-y-1">
+      <div className="flex flex-col h-[100px] w-full bg-white/50 rounded-bl-[24px] rounded-br-[24px] text-sm text-black space-y-1">
         <span className="text-sm text-center w-full">
           {`${detail.title}`} {`(${detail.reviews} reviews)`}
         </span>
