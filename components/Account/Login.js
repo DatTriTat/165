@@ -3,7 +3,11 @@ import AccountContext from "../Context/AccountContext";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserWithEmailAndPass } from "../../features/account/accountSlice";
+import {
+  loginUserWithEmailAndPass,
+  callback,
+  reservationHist,
+} from "../../features/account/accountSlice";
 import { useRouter } from "next/router";
 import { auth } from "../../firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
@@ -53,14 +57,15 @@ function Login() {
     e.preventDefault();
     if (userObj.email && userObj.pwd) {
       dispatch(loginUserWithEmailAndPass(userObj));
+      dispatch(reservationHist(userObj.email));
     }
   };
-  
+
   useEffect(() => {
-    if(loginStatus) {
-    router.replace("/");
+    if (loginStatus) {
+      router.replace("/");
     }
-  },[loginStatus])
+  }, [loginStatus]);
 
   return (
     <div className="backdrop-blur-md bg-white/30 border-4 border-slate-200 rounded-[50px] w-[500px] h-[600px] text-center ml-10">

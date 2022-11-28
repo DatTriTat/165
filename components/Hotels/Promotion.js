@@ -41,11 +41,14 @@ function Promotion() {
           <span className="text-center">
             100 points you can redeem to get 5% discount for booking
           </span>
-          <span className="text-center">{user.user.reward}</span>
+          <span className="text-center">
+            ----------------------
+          </span>
+          <span className="text-center font-bold tracking-wider">{user.user.reward.toFixed(2)} points.</span>
+
           <button className="text-center" onClick={Redeem}>
             Redeem
           </button>
-          <span className="text-center font-bold tracking-wider">{user.user.reward} points reward.</span>
         </div>
       )}
     </>
