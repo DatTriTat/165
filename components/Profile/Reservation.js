@@ -55,7 +55,7 @@ function Reservation() {
                 />
               </td>
               <td>{value.title}</td>
-              <td>01/24/2023 - 01/26/2023</td>
+              <td>{value.date[0]}-{value.date[1]}</td>
               <td>{value.accessibilityLabel}</td>
               <td>${value.amount_total / 100}</td>
               <td>

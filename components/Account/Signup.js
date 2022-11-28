@@ -26,7 +26,7 @@ function Signup() {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [phone, setPhone] = useState("");
-  let reward = 0;
+  let reward = 100;
   const object = { email, pwd, firstname, lastname, phone, reward};
   const handleRequire = (e) => {
     e === "email"

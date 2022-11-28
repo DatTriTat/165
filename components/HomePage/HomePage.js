@@ -4,9 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "../NavBar/Navbar";
 import HomePageContext from "../Context/HomePageContext";
 import MiddleSection from "./MiddleSection";
-import Hamburger from "../Header/Hamburger";
-import useAuth from "../Account/useAuth";
-import { useRouter } from "next/router";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../firebaseFunction";
 import { callback, reservationHist } from "../../features/account/accountSlice";

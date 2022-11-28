@@ -29,8 +29,8 @@ export default function FilterByAmenities() {
     setFilterAmenities({ name: "AMENITIES", value: amenities });
   }, [dispatch, amenities, setFilterAmenities]);
   return (
-    <div className="flex flex-col pt-4 font-bold space-y-2">
-      <span className="">Amenities</span>
+    <div className="flex flex-col pt-4  font-bold space-y-2">
+      <span className="ml-3">Amenities</span>
       {listAmenities.map((data) => (
         <span key={data}>
           <Checkbox

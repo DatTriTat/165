@@ -1,4 +1,3 @@
-import React, { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { UpdateProfile } from "../../features/account/accountSlice";
 import { auth } from "../../firebaseConfig";
@@ -9,27 +8,33 @@ import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import ContactPhoneOutlinedIcon from "@mui/icons-material/ContactPhoneOutlined";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { getCurrentUser } from "../../firebaseFunction";
+import { callback, reservationHist } from "../../features/account/accountSlice";
+import React, { useState, useEffect } from "react";
 
 function Profile() {
-  const router = useRouter();
-  const user = useAuth();
-  const data = useSelector((state) => state.account);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    getCurrentUser().then((user) => {
+      if (!user) return;
+      console.log(user);
+      dispatch(callback(user));
+      dispatch(reservationHist(user.email));
+    });
+  }, [dispatch]);
+  const router = useRouter();
+  const user = useAuth();
 
-  const [firstname, setFirstname] = useState(data.user.firstname);
+  const data = useSelector((state) => state.account);
+  console.log(data);
+  const [firstname, setFirstname] = useState();
   const [lastname, setLastname] = useState(data.user.lastname);
   const [phone, setPhone] = useState(data.user.phone);
   const [editFirstname, setEditFirstname] = useState(false);
   const [editLastname, setEditLastname] = useState(false);
   const [editPhone, setEditPhone] = useState(false);
   const [email] = useState(data.user.email);
-
-  var pwdLen = data.user.pwd.length;
-  var pwdHidden = data.user.pwd.charAt(0);
-  for (var i = 1; i < pwdLen; i++) {
-    pwdHidden += "*";
-  }
 
   var welcome = "Welcome back, " + data.user.firstname + "!";
   var welcomeDefault = "Welcome back!";
@@ -72,6 +77,7 @@ function Profile() {
     setEditLastname(false);
     setEditFirstname(false);
   };
+  if (!data) return <div>...loading</div>;
   return (
     <div className="flex flex-col justify-center items-center h-full w-full text-white">
       <div className="flex flex-col h-full w-full justify-center">
@@ -98,7 +104,9 @@ function Profile() {
                   </div>
                 ) : (
                   <span className="w-full text-right">
-                    {data.user.firstname ? firstname : "first name not found"}
+                    {data.user.firstname
+                      ? data.user.firstname
+                      : "first name not found"}
                   </span>
                 )}
                 <button
@@ -126,7 +134,9 @@ function Profile() {
                   </div>
                 ) : (
                   <span className="w-full text-right">
-                    {data.user.lastname ? lastname : "last name not found"}
+                    {data.user.lastname
+                      ? data.user.lastname
+                      : "last name not found"}
                   </span>
                 )}
                 <button
@@ -154,7 +164,9 @@ function Profile() {
                   </div>
                 ) : (
                   <span className="w-full text-right">
-                    {data.user.phone ? phone : "phone number not found"}
+                    {data.user.phone
+                      ? data.user.phone
+                      : "phone number not found"}
                   </span>
                 )}
                 <button
@@ -169,18 +181,21 @@ function Profile() {
           <tr>
             <td>Email: </td>
             <td>
-              <div className="w-full text-right">{email}</div>
+              <div className="w-full text-right">{data.user.email}</div>
             </td>
           </tr>
           <tr>
             <td>Password: </td>
             <td>
-              <div className="w-full text-right">{pwdHidden}</div>
+              <div className="w-full text-right">{}</div>
             </td>
           </tr>
         </tbody>
       </table>
-      <button className="bg-white w-[200px] p-3 text-black rounded-full mt-10" onClick={onSave}>
+      <button
+        className="bg-white w-[200px] p-3 text-black rounded-full mt-10"
+        onClick={onSave}
+      >
         Save
       </button>
     </div>

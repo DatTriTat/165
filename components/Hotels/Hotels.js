@@ -108,7 +108,7 @@ export default function Hotels(props) {
           initial={{ x: -300 }}
           animate={{ x: 0 }}
           transition={{ duration: 1 }}
-          className="min-h-full w-[300px] overflow-auto"
+          className="min-h-full w-[300px]"
         >
           <Profile namePage="hotels" />
           <Filter />

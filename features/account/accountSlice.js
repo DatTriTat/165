@@ -122,24 +122,24 @@ export const accountSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(createUserWithEmailAndPass.fulfilled, (state, action) => {
-      if (action.payload) state.signUp.status = action.payload;
+       state.signUp.status = action.payload;
     });
     builder.addCase(loginUserWithEmailAndPass.fulfilled, (state, action) => {
-      if (action.payload) state.login.status = true;
+      state.login.status = true;
       state.signUp.status = false;
       state.user = action.payload;
     });
     builder.addCase(UpdateProfile.fulfilled, (state, action) => {
-      if (action.payload) state.login.status = true;
+       state.login.status = true;
       state.user = action.payload;
     });
     builder.addCase(callback.fulfilled, (state, action) => {
-      if (action.payload) state.login.status = true;
+       state.login.status = true;
       state.signUp.status = false;
       state.user = action.payload;
     });
     builder.addCase(reservationHist.fulfilled, (state, action) => {
-      if (action.payload) state.reservationHist.isLoading = false;
+       state.reservationHist.isLoading = false;
       state.reservationHist.reservations = action.payload;
     });
   },

@@ -1,21 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
-import { auth } from "../../firebaseConfig";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { userSignOut } from "../../features/account/accountSlice";
-import useAuth from "../Account/useAuth";
 import {signOutUser}from "../../firebaseFunction";
+import { getCurrentUser } from "../../firebaseFunction";
+import { callback, reservationHist } from "../../features/account/accountSlice";
 
 
-import Link from "next/link";
 
 function Profile(props) {
   const dispatch = useDispatch();
-  const auth = useAuth();
   const router = useRouter();
   const linkParam = router.query;
   const user = useSelector((state) => state.account);
+  useEffect(() => {
+    getCurrentUser().then((user) => {
+      if(!user) return;
+      console.log(user);
+      dispatch(callback(user));
+      dispatch(reservationHist(user.email));
+    });
+  }, [dispatch]);
   const SignOut = async (e) => {
     e.preventDefault();
     dispatch(userSignOut());
