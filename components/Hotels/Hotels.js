@@ -34,6 +34,7 @@ export default function Hotels(props) {
   // const getHotelsDestById = useSelector(
   //   (state) => state.hotels.getHotelByDestinationId.hotels
   // );
+
   const loadHotels = useSelector(
     (state) => state.hotels.getHotelByDestinationId.isLoading
   );

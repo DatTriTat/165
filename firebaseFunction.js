@@ -86,7 +86,7 @@ export const loginUser = async (objUser) => {
   const querySnapshot = await getDocs(q);
   if (querySnapshot.empty) {
     alert("Invalid Email or Password");
-    return {};
+    return 
   }
   signInWithEmailAndPassword(auth, objUser.email, objUser.pwd)
     .then((userCredential) => {

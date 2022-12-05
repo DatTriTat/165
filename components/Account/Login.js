@@ -15,12 +15,11 @@ import useAuth from "./useAuth";
 import { loginUser } from "../../firebaseFunction";
 
 function Login() {
-  const user = useAuth();
   const router = useRouter();
   const linkParam = router.query;
   const { setSignup, setForgotpass } = useContext(AccountContext);
   const [userObj, setUserObj] = useState({ email: null, pwd: null });
-  const loginStatus = useSelector((state) => state.account.login.status);
+  const user = useSelector((state) => state.account.user);
   const dispatch = useDispatch();
   const [Required, setRequired] = useState({
     emailRequired: false,
@@ -54,18 +53,18 @@ function Login() {
     setUserObj({ ...userObj, pwd: e.target.value });
   };
   const signIn = async (e) => {
-    e.preventDefault();
-    if (userObj.email && userObj.pwd) {
-      dispatch(loginUserWithEmailAndPass(userObj));
-      dispatch(reservationHist(userObj.email));
+    try {
+      e.preventDefault();
+      const a = await loginUser(userObj);
+      if (a) {
+        dispatch(loginUserWithEmailAndPass(userObj))
+        dispatch(reservationHist(userObj.email))
+        router.replace("/");
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
-
-  useEffect(() => {
-    if (loginStatus) {
-      router.replace("/");
-    }
-  }, [loginStatus]);
 
   return (
     <div className="backdrop-blur-md bg-white/30 border-4 border-slate-200 rounded-[50px] w-[500px] h-[600px] text-center ml-10">

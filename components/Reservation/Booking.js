@@ -20,7 +20,7 @@ function Booking() {
   const [valueCheckOut, onChangeCheckOut] = useState(new Date());
   const reservations = useSelector((state) => state.account.reservationHist);
   const user = useSelector((state) => state.account);
-  
+
   let checkInDate = {
     date: valueCheckIn.getDate().toString(),
     month: (valueCheckIn.getMonth() + 1).toString(),

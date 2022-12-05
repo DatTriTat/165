@@ -38,7 +38,7 @@ function MainProfile() {
         </span>
         <span className={`hover:scale-125 cursor-pointer ${(isOpen == PROFILE) ? 'underline' : ''} `} onClick={()=> setOpen(PROFILE)}>Profile</span>
         <span className={`hover:scale-125 cursor-pointer ${(isOpen == RESERVATION) ? 'underline' : ''}`} onClick={()=> setOpen(RESERVATION)}> Reservations</span>
-        <span className={`hover:scale-125 cursor-pointer ${(isOpen == PAYMENT) ? 'underline' : ''} `} onClick={()=> setOpen(PAYMENT)}>Payment</span>
+        <span className={`hover:scale-125 cursor-pointer ${(isOpen == PAYMENT) ? 'underline' : ''} `} onClick={()=> setOpen(PAYMENT)}> Owner</span>
         <button
           className="flex flex-col justify-center align-center text-white px-4 text-center"
           onClick={signOutHandler}
